@@ -20,7 +20,7 @@ var app = express();
 
 //Handlebars
 var exphbs = require("express-handlebars");
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({ defaultLayout: "index" }));
 app.set("view engine", "handlebars");
 
 // Use body-parser for handling form submissions
