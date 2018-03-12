@@ -20,7 +20,7 @@ var app = express();
 
 //Handlebars
 var exphbs = require("express-handlebars");
-app.engine("handlebars", exphbs({ defaultLayout: "index" }));
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Use body-parser for handling form submissions
@@ -33,7 +33,7 @@ app.use(express.static("public"));
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
 mongoose.connect("mongodb://localhost/scraperHW", {
-  useMongoClient: true
+  // useMongoClient: true
 });
 
 // Start the server
