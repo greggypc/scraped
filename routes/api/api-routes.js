@@ -1,7 +1,14 @@
-
+var express = require("express");
 var db = require('../../models')
+// Our scraping tools
+// Axios is a promised-based http library, similar to jQuery's Ajax method
+// It works on the client and on the server
+var axios = require("axios");
+var cheerio = require("cheerio");
 // Routes
 
+
+module.exports = function(app) {
 // A GET route for scraping the echojs website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
@@ -10,7 +17,7 @@ app.get("/scrape", function(req, res) {
     var $ = cheerio.load(response.data);
 
     // Now, we grab every h2 within an Headline tag, and do the following:
-    $("Headline h2").each(function(i, element) {
+    $("article h2").each(function(i, element) {
       // Save an empty result object
       var result = {};
 
@@ -40,7 +47,7 @@ app.get("/scrape", function(req, res) {
 });
 
 // Route for getting all Headlines from the db
-app.get("/Article", function(req, res) {
+app.get("/articles", function(req, res) {
   // Grab every document in the Headlines collection
   db.Article.find({})
     .then(function(dbArticle) {
@@ -54,7 +61,7 @@ app.get("/Article", function(req, res) {
 });
 
 // Route for grabbing a specific Headline by id, populate it with it's note
-app.get("/Article/:id", function(req, res) {
+app.get("/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   db.Article.findOne({ _id: req.params.id })
     // ..and populate all of the notes associated with it
@@ -70,7 +77,7 @@ app.get("/Article/:id", function(req, res) {
 });
 
 // Route for saving/updating an Headline's associated Note
-app.post("/Article/:id", function(req, res) {
+app.post("/articles/:id", function(req, res) {
   // Create a new note and pass the req.body to the entry
   db.Note.create(req.body)
     .then(function(dbNote) {
@@ -88,3 +95,5 @@ app.post("/Article/:id", function(req, res) {
       res.json(err);
     });
 });
+
+};
