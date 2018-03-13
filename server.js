@@ -25,8 +25,8 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 // Routes
-require("./routes/api/api-routes.js")(app);
-require("./routes/view/html-routes.js")(app);
+require("./routes/api-routes.js")(app);
+require("./routes/html-routes.js")(app);
 
 // By default mongoose uses callbacks for async queries, we're setting it to use promises (.then syntax) instead
 // Connect to the Mongo DB

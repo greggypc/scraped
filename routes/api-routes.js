@@ -1,5 +1,5 @@
 var express = require("express");
-var db = require('../../models')
+var db = require('../models')
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
@@ -10,7 +10,7 @@ var cheerio = require("cheerio");
 
 module.exports = function(app) {
 // A GET route for scraping the echojs website
-app.get("/scrape", function(req, res) {
+app.get("/api/scrape", function(req, res) {
   // First, we grab the body of the html with request
   axios.get("http://www.echojs.com/").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
@@ -47,7 +47,7 @@ app.get("/scrape", function(req, res) {
 });
 
 // Route for getting all Headlines from the db
-app.get("/articles", function(req, res) {
+app.get("/api/articles", function(req, res) {
   // Grab every document in the Headlines collection
   db.Article.find({})
     .then(function(dbArticle) {
@@ -61,7 +61,7 @@ app.get("/articles", function(req, res) {
 });
 
 // Route for grabbing a specific Headline by id, populate it with it's note
-app.get("/articles/:id", function(req, res) {
+app.get("/api/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   db.Article.findOne({ _id: req.params.id })
     // ..and populate all of the notes associated with it
@@ -77,7 +77,7 @@ app.get("/articles/:id", function(req, res) {
 });
 
 // Route for saving/updating an Headline's associated Note
-app.post("/articles/:id", function(req, res) {
+app.post("/api/articles/:id", function(req, res) {
   // Create a new note and pass the req.body to the entry
   db.Note.create(req.body)
     .then(function(dbNote) {
