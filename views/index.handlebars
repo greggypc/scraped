@@ -34,17 +34,19 @@
 
   <div class="articles-container">
     {{#each headline}}
-    
-      <div class="row">
-        <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">{{this.title}}</h3>
-          <button type="button" class="btn btn-success btn-save">Save Article</button>
+      {{#unless saved}}
+        <div class="row">
+          <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{this.title}}</h3>
+            <button type="button" class="btn btn-success btn-save">Save Article</button>
+          </div>
+          <div class="panel-body">
+            {{this.summary}}
+          </div>
+          </div>
         </div>
-        <div class="panel-body">
-          {{this.summary}}
-        </div>
-      </div>
+      {{/unless}}
      {{/each}}
    </div>
 

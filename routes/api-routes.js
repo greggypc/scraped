@@ -21,18 +21,18 @@ module.exports = function(app) {
   });
 
 // Route for getting all Headlines from the db
-// app.get("/api/articles", function(req, res) {
-//   // Grab every document in the Headlines collection
-//   db.Article.find({})
-//     .then(function(dbArticle) {
-//       // If we were able to successfully find Headlines, send them back to the client
-//       res.json(dbArticle);
-//     })
-//     .catch(function(err) {
-//       // If an error occurred, send it to the client
-//       res.json(err);
-//     });
-// });
+app.get("/headlines", function(req, res) {
+  // Grab every document in the Articles collection
+  db.Headline.find({})
+    .then(function(dbHeadline) {
+      // If we were able to successfully find Articles, send them back to the client
+      res.json(dbHeadline);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
 
 // Route for grabbing a specific Headline by id, populate it with it's note
 // app.get("/api/articles/:id", function(req, res) {

@@ -15,6 +15,14 @@ var HeadlineSchema = new Schema({
     type: String,
     required: true
   },
+  subtitle: {
+    type: String,
+    required: true
+  },
+  imgLink: {
+    type: String,
+    required: true
+  },
   // headline set to unsaved initially
   saved: {
     type: Boolean,
