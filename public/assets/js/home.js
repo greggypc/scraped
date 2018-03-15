@@ -11,17 +11,17 @@
 
   layoutPage();
   
-  function layoutPage() {
-    articlesContainer.empty();
-    $.get("/api/articles?saved=false").then( function(articles) {
-      if (!articles || !articles.length) {
-        displayEmpty();
-      }
-      else {
-        initializeArticlesRows(articles);
-      }
-    });
-  }
+  // function layoutPage() {
+  //   articlesContainer.empty();
+  //   $.get("/api/articles?saved=false").then( function(articles) {
+  //     if (!articles || !articles.length) {
+  //       displayEmpty();
+  //     }
+  //     else {
+  //       initializeArticlesRows(articles);
+  //     }
+  //   });
+  // }
 
   function initializeArticlesRows() {
     var articlesToAdd = [];
@@ -54,8 +54,8 @@
       return $newArticleRow;
   };
 
-function handleNewScrape() {
-  $.get("/api/fetch").then(function(articles) {
-    layoutPage();
-  });
-};
+// function handleNewScrape() {
+//   $.get("/api/fetch").then(function(articles) {
+//     layoutPage();
+//   });
+// };

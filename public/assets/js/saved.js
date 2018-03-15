@@ -11,15 +11,15 @@
    // Click event to save new note
   $(document).on("click", "button.btn-save-note", handleSaveNote);
 
-  function getSavedArticles() {
-    $.get("/api/saved/"), function (data) {
-      saveArticles = data;
-      if(!saveArticles) {
-        displayEmptyArticles();
-      }else {
-        displaySavedArticles();
-      }
-    }
-  }
+  // function getSavedArticles() {
+  //   $.get("/api/saved/"), function (data) {
+  //     saveArticles = data;
+  //     if(!saveArticles) {
+  //       displayEmptyArticles();
+  //     }else {
+  //       displaySavedArticles();
+  //     }
+  //   }
+  // }
 
  

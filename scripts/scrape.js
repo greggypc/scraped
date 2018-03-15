@@ -1,30 +1,38 @@
 //scripts - scrape
-
-var axios = require("axios");
+var db = require("../models/Headline.js");
+var request = require("request");
 var cheerio = require("cheerio");
 
 var scrape = function() {
- return axios.get("http://www.echojs.com/").then(function(response) {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
-    var $ = cheerio.load(response.data);
+  request("https://news.ycombinator.com/", function(error, response, html) {
+    // Load the html body from request into cheerio
+    var $ = cheerio.load(html);
+    // For each element with a "title" class
+    $(".title").each(function(i, element) {
+      // Save the text and href of each link enclosed in the current element
+      var title = $(element).children("a").text();
+      var link = $(element).children("a").attr("href");
 
-  var articles = [];
-
-  // Now, we grab every h2 within an Headline tag, and do the following:
-  $("article h2").each(function(i, element) {
-    // Save an empty result object
-    var result = {};
-
-    // Add the text and href of every link, and save them as properties of the result object
-    result.title = $(this)
-      .children("a")
-      .text();
-    result.link = $(this)
-      .children("a")
-      .attr("href");
-  
+      // If this found element had both a title and a link
+      if (title && link) {
+        // Insert the data in the scrapedData db
+        db.create({
+          title: title,
+          link: link
+        },
+        function(err, inserted) {
+          if (err) {
+            // Log the error if one is encountered during the query
+            console.log(err);
+          }
+          else {
+            // Otherwise, log the inserted data
+            console.log(inserted);
+          }
+        });
+      }
+    });
   });
- });
 };
 
 module.exports = scrape;

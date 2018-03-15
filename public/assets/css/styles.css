@@ -1,8 +1,7 @@
 
-button.btn-scrape {
-  margin-top: 8px;
-}
 
-.btn-danger {
+.btn-scrape{
   color: yellow;
+  margin-top: 8px;
+
 }
