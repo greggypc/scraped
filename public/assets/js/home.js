@@ -1,61 +1,63 @@
 
 
   // hold our scraped headlines
-  var articlesContainer = $(".articles-container");
+  var headlinesContainer = $(".headlines-container");
   
   // Click event to save headlines
-  $(document).on("click", "button.btn-save", handleSaveArticle);
+  //$(document).on("click", "button.btn-save", handleSaveHeadline);
   // Click event to scrape anew
-  $(document).on("click", "button.btn-scrape", handleNewScrape);
-
+ $(document).on("click", "button.btn-scrape", handleNewScrape);
 
   layoutPage();
   
-  // function layoutPage() {
-  //   articlesContainer.empty();
-  //   $.get("/api/articles?saved=false").then( function(articles) {
-  //     if (!articles || !articles.length) {
-  //       displayEmpty();
-  //     }
-  //     else {
-  //       initializeArticlesRows(articles);
-  //     }
-  //   });
-  // }
+  function layoutPage() {
+    headlinesContainer.empty();
+    $.get("/articles").then( headlines => {
+      console.log(`a headline ${headlines[3]}...anything?`);
 
-  function initializeArticlesRows() {
-    var articlesToAdd = [];
-    for (var i = 0; i < articles.length; i++) {
-      articlesToAdd.push(createNewArticleRow(articles[i]));
+      if (!headlines || !headlines.length) {
+        displayEmpty();
+        console.log("no headlines! It's empty!");
+      }
+      else {
+        renderHeadlines(headlines);
+        console.log("we have headlines - calling function initializeHeadlinesRows ");
+      }
+    });
+  };
+
+  function renderHeadlines(headlines) {
+    var headlinesToAdd = [];
+    for (var i = 0; i < headlines.length; i++) {
+      headlinesToAdd.push(createHeadline(headlines[i]));
     }
-    articlesContainer.append(articlesToAdd);
-  }
+    headlinesContainer.append(headlinesToAdd);
+  };
 
-  //============BUILD OUT INDIVIDUAL ARTICLES INTO .articles-container==========
+  //============BUILD OUT INDIVIDUAL HEADLINE INTO .headlines-container==========
 
-  function createNewArticleRow(articles) {
-    console.log("article object " , articles);
+  function createHeadline(headline) {
+    console.log("headline object " + headline + "...anything?");
 
-     var $newArticleRow =  $('.articles-container').append(`
+     var newPanel =  $(
+       [`
      <div class="row">
      <div class="panel panel-default">
      <div class="panel-heading">
-       <h3 class="panel-title">${article.title}</h3>
-       <button type="button" class="btn btn-success btn-save">Save Article</button>
+       <h3 class="panel-title">${headline.title}</h3>
+       <button type="button" class="btn btn-success btn-save" id="${headline._id}>Save Article</button>
      </div>
      <div class="panel-body">
-       ${article.summary}
+       ${headline.summary}
      </div>
    </div>
-      `); 
+      `]); 
 
-      newArticleRow.data("_id", article._id);
-
-      return $newArticleRow;
+      return newPanel;
   };
 
-// function handleNewScrape() {
-//   $.get("/api/fetch").then(function(articles) {
-//     layoutPage();
-//   });
-// };
+function handleNewScrape() {
+  $.get("/scrape").then(function(articles) {
+    layoutPage();
+  });
+};

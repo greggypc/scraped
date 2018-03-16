@@ -31,14 +31,14 @@
       </div>
     </div>
 
-
-  <div class="articles-container">
-    {{#each headline}}
-      {{#unless saved}}
+<div class="headlines-container">  
+{{#each headlines}}
+  {{#unless saved}}
+     
         <div class="row">
           <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">{{this.title}}</h3>
+            <h3 class="panel-title"><a href="{{this.link}}">{{this.title}}</a></h3>
             <button type="button" class="btn btn-success btn-save">Save Article</button>
           </div>
           <div class="panel-body">
@@ -46,9 +46,9 @@
           </div>
           </div>
         </div>
-      {{/unless}}
-     {{/each}}
-   </div>
+  {{/unless}}
+{{/each}}
+</div>
 
       <footer>
         <p>&copy; 2018 Scraper, Inc. All Rights Reserved</p>

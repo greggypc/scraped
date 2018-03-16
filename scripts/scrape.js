@@ -1,5 +1,5 @@
 //scripts - scrape
-var db = require("../models/Headline.js");
+var Headline = require("../models/Headline.js");
 var request = require("request");
 var cheerio = require("cheerio");
 
@@ -15,10 +15,10 @@ var scrape = function() {
       var subtitle = $(element).find(".teaser").find("a").text();
       var imgLink = $(element).find("a").find("img").attr("src");
 
-      // If this found element had both a title and a link
+      // If this found element contains all data I need
       if (title && link && subtitle && imgLink) {
         // Insert the data in the Headline collection
-        db.create({
+        Headline.create({
           title: title,
           link: link,
           subtitle: subtitle,
