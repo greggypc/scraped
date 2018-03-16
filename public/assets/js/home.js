@@ -1,4 +1,6 @@
 
+$(document).ready(function() {
+  console.log(`home.js`);
 
   // hold our scraped headlines
   var headlinesContainer = $(".headlines-container");
@@ -8,22 +10,24 @@
   // Click event to scrape anew
  $(document).on("click", "button.btn-scrape", handleNewScrape);
 
-  layoutPage();
+
   
   function layoutPage() {
-    headlinesContainer.empty();
-    $.get("/articles").then( headlines => {
-      console.log(`a headline ${headlines[3]}...anything?`);
+    console.log(`in layoutPage()`);
 
-      if (!headlines || !headlines.length) {
-        displayEmpty();
+    //headlinesContainer.empty();
+    $.getJSON("/headlines"), data => {
+      console.log(`a headline ${data}...anything?`);
+    
+      if (!data || !data.length) {
         console.log("no headlines! It's empty!");
+        displayEmpty();
       }
       else {
-        renderHeadlines(headlines);
+        renderHeadlines(data);
         console.log("we have headlines - calling function initializeHeadlinesRows ");
       }
-    });
+    };
   };
 
   function renderHeadlines(headlines) {
@@ -33,6 +37,8 @@
     }
     headlinesContainer.append(headlinesToAdd);
   };
+
+  layoutPage();
 
   //============BUILD OUT INDIVIDUAL HEADLINE INTO .headlines-container==========
 
@@ -44,8 +50,8 @@
      <div class="row">
      <div class="panel panel-default">
      <div class="panel-heading">
-       <h3 class="panel-title">${headline.title}</h3>
-       <button type="button" class="btn btn-success btn-save" id="${headline._id}>Save Article</button>
+     <h3 class="panel-title"><a href="${headline.link}">${headline.title}</a></h3>
+     <button type="button" class="btn btn-success btn-save" id="${headline._id}>Save Article</button>
      </div>
      <div class="panel-body">
        ${headline.summary}
@@ -61,3 +67,6 @@ function handleNewScrape() {
     layoutPage();
   });
 };
+
+
+}); 
