@@ -2,6 +2,7 @@
 var Headline = require("../models/Headline.js");
 var request = require("request");
 var cheerio = require("cheerio");
+var express = require("express");
 
 var scrape = function() {
   request("https://www.npr.org/sections/news/", function(error, response, html) {

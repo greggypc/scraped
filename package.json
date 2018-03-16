@@ -23,7 +23,9 @@
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
+    "logger": "0.0.1",
     "mongoose": "^5.0.9",
+    "morgan": "^1.9.0",
     "nodemon": "^1.17.1",
     "request": "^2.83.0"
   }

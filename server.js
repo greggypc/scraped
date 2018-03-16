@@ -1,7 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-
+var logger = require("morgan");
 // Require all models
 var db = require("./models");
 
@@ -11,6 +11,9 @@ var PORT = 3003;
 var app = express();
 
 // Configure middleware
+
+// Use morgan logger for logging requests
+app.use(logger('dev'));
 
 // Handlebars
 var exphbs = require("express-handlebars");
