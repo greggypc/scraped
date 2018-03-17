@@ -22,17 +22,29 @@ module.exports = function(app) {
   });
 
 // Route for getting all Headlines from the db
-app.get("/headlines", (req, res) => {
-  console.log(req.body);
+// app.get("/headlines", (req, res) => {
+//   console.log(req.body);
 
-  // Grab every document in the Headlines collection
-  // If we were able to successfully find Headlines, send them back to home page
-  Headline.find({}).then(result =>  res.json(result))
+//   // Grab every document in the Headlines collection
+//   // If we were able to successfully find Headlines, send them back to home page
+//   Headline.find({}).then(result =>  res.json(result))
 
-    // If an error occurred, send it to the client
-    .catch(err => {
-      res.json(err);
-    });
+//     // If an error occurred, send it to the client
+//     .catch(err => {
+//       res.json(err);
+//     });
+// });
+
+app.get("/headlines", function (req, res) {
+  Headline.find({}, function (error, data) {
+      if (error) {
+          console.log(error);
+      } else {
+        console.log(data);
+        res.json(data);
+      }
+  });
 });
+
 
 };

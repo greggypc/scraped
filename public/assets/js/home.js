@@ -15,9 +15,9 @@ $(document).ready(function() {
   function layoutPage() {
     console.log(`in layoutPage()`);
 
-    //headlinesContainer.empty();
-    $.getJSON("/headlines"), data => {
-      console.log(`a headline ${data}...anything?`);
+    headlinesContainer.empty();
+    $.get("/headlines"), data => {
+      console.log(data);
     
       if (!data || !data.length) {
         console.log("no headlines! It's empty!");
@@ -31,6 +31,8 @@ $(document).ready(function() {
   };
 
   function renderHeadlines(headlines) {
+    console.log("we have headlines? " + headlines);
+
     var headlinesToAdd = [];
     for (var i = 0; i < headlines.length; i++) {
       headlinesToAdd.push(createHeadline(headlines[i]));
