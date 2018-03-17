@@ -26,26 +26,40 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Let's Scrape</h1>
-        <p>Find articles of interest and save them for later.</p>
+        <h1 id="strike-through">This is Fresh Air!</h1>
+        <h1>This is NPR News Scraper</h1>
+        <p>The freshest news scraped right form the NPR headlines</p>
       </div>
     </div>
 
-<div class="headlines-container">  
+<div class="container headlines-container"> 
+    
 {{#each headlines}}
   {{#unless saved}}
-     
-        <div class="row">
+     <div class="row">
+        {{!-- <div class="col-lg-2 col-md-2 col-sm-2" >
+            <img class="img-responsive img-thumbnail" src="{{this.imgLink}}" alt="{{this.title}}" />
+        </div> --}}
+        
+        <div class="col-lg-10 col-md-10 col-sm-10" > 
           <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title"><a href="{{this.link}}">{{this.title}}</a></h3>
-            <button type="button" class="btn btn-success btn-save">Save Article</button>
+            <h3 class="panel-title"><a href="{{this.link}}" target="_blank">{{this.title}}</a>
+            
           </div>
           <div class="panel-body">
-            {{this.summary}}
+            <div class="col-lg-3 col-md-3 col-sm-3" >
+            <a href="{{this.link}}" target="_blank"><img width="200px" class="img-responsive img-thumbnail news-thumb" src="{{this.imgLink}}" alt="{{this.title}}" /></a>
+            </div> 
+            <div class="col-lg-9 col-md-9 col-sm-9" >
+            <div>{{this.subtitle}}</div>
+            <div><button type="button" class="btn btn-success pull-right btn-save">Save Article</button></h3></div>
+            </div> 
           </div>
           </div>
         </div>
+        {{!-- <div class="col-lg-2 col-md-2 col-sm-2" ></div> --}}
+    </div>
   {{/unless}}
 {{/each}}
 </div>

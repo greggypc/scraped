@@ -3,3 +3,15 @@
 .btn-scrape{
   margin-top: 8px;
 }
+
+#strike-through {
+  text-decoration: line-through;
+}
+
+.news-thumb {
+  /* margin: 0 10px 10px 0; */
+}
+
+.btn-save {
+  margin-bottom: 10px;
+}
