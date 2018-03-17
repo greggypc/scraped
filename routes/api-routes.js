@@ -10,7 +10,7 @@ var scrape = require("../scripts/scrape.js");
 // Models
 var Headline = require("../models/Headline.js");
 var Note = require("../models/Note.js");
-
+//var bodyParser = require("body-parser");
 
 // Routes
 
@@ -21,30 +21,14 @@ module.exports = function(app) {
       res.send("Scrape complete.");
   });
 
-// Route for getting all Headlines from the db
-// app.get("/headlines", (req, res) => {
-//   console.log(req.body);
-
-//   // Grab every document in the Headlines collection
-//   // If we were able to successfully find Headlines, send them back to home page
-//   Headline.find({}).then(result =>  res.json(result))
-
-//     // If an error occurred, send it to the client
-//     .catch(err => {
-//       res.json(err);
-//     });
-// });
-
-app.get("/headlines", function (req, res) {
-  Headline.find({}, function (error, data) {
-      if (error) {
-          console.log(error);
-      } else {
-        console.log(data);
-        res.json(data);
-      }
-  });
+// Route for getting all Headlines to DOM index
+  app.get('/', (req,res) => {
+  Headline
+    .find({})
+    .then(headlines => res.render('index', {headlines}))
+    .catch(err=> res.json(err));
 });
+
 
 
 };
