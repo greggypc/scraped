@@ -28,7 +28,7 @@
       <div class="container">
         <h1 id="strike-through">This is Fresh Air!</h1>
         <h1>This is NPR News Scraper</h1>
-        <p>The freshest news scraped right form the NPR headlines</p>
+        <p>The freshest news scraped right from the NPR headlines</p>
       </div>
     </div>
 
@@ -41,19 +41,19 @@
             <img class="img-responsive img-thumbnail" src="{{this.imgLink}}" alt="{{this.title}}" />
         </div> --}}
         
-        <div class="col-lg-10 col-md-10 col-sm-10" > 
+        <div class="col-lg-12 col-md-12 col-sm-12" > 
           <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title"><a href="{{this.link}}" target="_blank">{{this.title}}</a>
-            
+          <div id="headline-panel" class="panel-heading clearfix">
+            <h3 class="panel-title align-middle"><a href="{{this.link}}" target="_blank">{{this.title}}</a>
+            <button type="button" class="btn btn-success pull-right btn-save">Save Article</button></h3>
+
           </div>
           <div class="panel-body">
-            <div class="col-lg-3 col-md-3 col-sm-3" >
+            <div class="col-lg-3 col-md-3 col-sm-3 news-thumb" >
             <a href="{{this.link}}" target="_blank"><img width="200px" class="img-responsive img-thumbnail news-thumb" src="{{this.imgLink}}" alt="{{this.title}}" /></a>
             </div> 
             <div class="col-lg-9 col-md-9 col-sm-9" >
             <div>{{this.subtitle}}</div>
-            <div><button type="button" class="btn btn-success pull-right btn-save">Save Article</button></h3></div>
             </div> 
           </div>
           </div>
