@@ -1,6 +1,6 @@
 //controller - fetch headlines
 
-const db = require("models");
+const db = require("../models");
 const scrape = require("../scripts/scrape");
 
 // 1. scrape articles
@@ -17,18 +17,18 @@ module.exports = {
       .then(dbHeadline => {
         if (dbHeadline.length === 0) {
           res.json({
-            message: "No new articles available"
+            message: `No new articles available`
           });
         }
         else {
           res.json({
-            message: "Added " dbHeadline.length + " new articles."
+            message: `Added ${dbHeadline.length} new articles.`
           });
         }
       })
       .catch(err => {
         res.json({
-          message: "Article scrape complete."
+          message: `Article scrape complete.`
         });
       });
   }

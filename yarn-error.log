@@ -1,0 +1,69 @@
+Arguments: 
+  /usr/local/Cellar/node/9.5.0/bin/node /usr/local/bin/yarn start
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  9.5.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "scraped",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/greggypc/scraped.git"
+    },
+    "author": "greggypc",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/greggypc/scraped/issues"
+    },
+    "homepage": "https://github.com/greggypc/scraped#readme",
+    "dependencies": {
+      "axios": "^0.18.0",
+      "body-parser": "^1.18.2",
+      "bootbox": "^4.4.0",
+      "cheerio": "^1.0.0-rc.2",
+      "express": "^4.16.2",
+      "express-handlebars": "^3.0.0",
+      "logger": "0.0.1",
+      "mongoose": "^5.0.9",
+      "morgan": "^1.9.0",
+      "nodemon": "^1.17.1",
+      "request": "^2.83.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Command failed.
+  Exit code: 1
+  Command: sh
+  Arguments: -c node server.js
+  Directory: /Users/greg/dev/Homework/Homework16/scraped
+  Output:
+  
+      at ProcessTermError.MessageError (/usr/local/lib/node_modules/yarn/lib/cli.js:186:110)
+      at new ProcessTermError (/usr/local/lib/node_modules/yarn/lib/cli.js:226:113)
+      at ChildProcess.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:30281:17)
+      at ChildProcess.emit (events.js:160:13)
+      at maybeClose (internal/child_process.js:943:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:220:5)

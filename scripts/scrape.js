@@ -1,42 +1,44 @@
 //scripts - scrape
-var Headline = require("../models/Headline.js");
-var request = require("request");
-var cheerio = require("cheerio");
-var express = require("express");
 
-var scrape = function() {
-  request("https://www.npr.org/sections/news/", function(error, response, html) {
-    // Load the html body from request into cheerio
-    var $ = cheerio.load(html);
+const axios = require("axios");
+const cheerio = require("cheerio");
+
+const scrape = function() {
+  // scrape NPR site
+  return axios.get("https://www.npr.org/sections/news/")
+    .then(res => {
+      const $ = cheerio.load(res.data);
+      // empty array to hold article data
+      const articles = [];
+    
     // For each element with a "title" class
-    $("article.item").each(function(i, element) {
-      // Save the text and href of each link enclosed in the current element
-      var title = $(element).find(".title").find("a").text();
-      var link = $(element).find(".title").find("a").attr("href");
-      var subtitle = $(element).find(".teaser").find("a").text();
-      var imgLink = $(element).find("a").find("img").attr("src");
+    $("article.item").each((i, element) => {
+      // Save data of each link enclosed in the current element
+      var title = $(element).find(".title").find("a").text().trim();
+      var url = $(element).find(".title").find("a").attr("href");
+      var summary = $(element).find(".teaser").find("a").text().trim();
+      var imgUrl = $(element).find("a").find("img").attr("src");
 
       // If this found element contains all data I need
       if (title && link && subtitle && imgLink) {
+
+        //make tidy. Remmove extra lines/spaces
+        const titleNeat = title.replace(/(\r\n|\n|\r|\t||\s+)/gm, " ").trim();
+        const summaryNeat = summary.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
+
         // Insert the data in the Headline collection
-        Headline.create({
-          title: title,
-          link: link,
-          subtitle: subtitle,
-          imgLink: imgLink
-        },
-        function(err, inserted) {
-          if (err) {
-            // Log the error if one is encountered during the query
-            console.log(err);
-          }
-          else {
-            // Otherwise, log the inserted data
-            console.log(inserted);
-          }
-        });
+        const dataToAdd = {
+          title: titleNeat,
+          url: url,
+          summary: summaryNeat,
+          imgUrl: imgUrl
+        };
+       
+        // push each article data into 'articles' array
+        articles.push(dataToAdd);
       }
     });
+    return articles;
   });
 };
 

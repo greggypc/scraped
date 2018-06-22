@@ -1,10 +1,10 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 // Save a reference to the Schema constructor
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 // Using the Schema constructor, create a new Headlinechema object
-var HeadlineSchema = new Schema({
+const HeadlineSchema = new Schema({
   // `title` is required and of type String
   title: {
     type: String,
@@ -12,15 +12,15 @@ var HeadlineSchema = new Schema({
     required: true
   },
   // `link` is required and of type String
-  link: {
+  url: {
     type: String,
     required: true
   },
-  subtitle: {
+  summary: {
     type: String,
     required: true
   },
-  imgLink: {
+  imgUrl: {
     type: String,
     required: true
   },
