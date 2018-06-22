@@ -1,34 +1,36 @@
-//controller - fetch - 
+//controller - fetch headlines
 
-//  var Headline = require("./models/Headline.js");
-//  var scrape = require("./scripts/scrape");
+const db = require("models");
+const scrape = require("../scripts/scrape");
 
-// module.exports = {
-//   scrapeArticles: function(req, res) {
-//     // scrape the NYT
-//     return scrape()
-//       .then(function(articles) {
-//         // then insert articles into the db
-//         return Headline.create(articles);
-//       })
-//       .then(function(Headline) {
-//         if (Headlinee.length === 0) {
-//           res.json({
-//             message: "No new articles today. Check back tomorrow!"
-//           });
-//         }
-//         else {
-//           // Otherwise send back a count of how many new articles we got
-//           res.json({
-//             message: "Added " + Headline.length + " new articles!"
-//           });
-//         }
-//       })
-//       .catch(function(err) {
-//         // This query won't insert articles with duplicate headlines, but it will error after inserting the others
-//         res.json({
-//           message: "Scrape complete!!"
-//         });
-//       });
-//   }
-//  };
+// 1. scrape articles
+// 2. then insert articles to db
+// 3. then check for new articles
+// 4. return no new OR count of new articles
+
+module.exports = {
+  scrapeHeadlines : function(req, res) {
+    return scrape()
+      .then(articles => {
+        return db.Headline.create(articles);
+      })
+      .then(dbHeadline => {
+        if (dbHeadline.length === 0) {
+          res.json({
+            message: "No new articles available"
+          });
+        }
+        else {
+          res.json({
+            message: "Added " dbHeadline.length + " new articles."
+          });
+        }
+      })
+      .catch(err => {
+        res.json({
+          message: "Article scrape complete."
+        });
+      });
+  }
+};
+

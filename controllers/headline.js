@@ -1,20 +1,30 @@
-//controller - headline
+//controller - headlines
 
-// Grab the articles as a json
-// $.getJSON("/", function(headlines) {
-//   // For each one
-//   for (var i = 0; i < headlines.length; i++) {
-//     // Display on the page
-//     $(".articles-container").append(`
-//       <div class="row">
-//         <div class="panel panel-default">
-//         <div class="panel-heading">
-//           <h3 class="panel-title"><a href="${headlines.link}" target="_blank">{{healines.title}}</a></h3>
-//           <a class="btn btn-success btn-save" id="${headlines._id}">Save Article</a>
-//         </div>
-//         </div>
-//       </div>
-//     `);
-//   }
-// });
+const db = require("../models");
+
+module.exports = {
+  // find all headlines, sort by date and return
+  findAll(req, res) {
+    db.Headline
+      .find(req.query)
+      .sort({ date: -1 })
+      .then(dbHeadline => {
+        res.json(dbHeadline);
+      });
+  },
+  // delete a specific headline
+  delete(req, res) {
+    db.Headline.remove({ _id: req.params.id }).then(dbHeadline => {
+      res.json(dbHeadline);
+    });
+  },
+  // update specific headline
+  update(req, res) {
+    db.Headline.findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true }).then(dbHeadline => {
+      res.json(dbHeadline);
+    });
+  }
+};
+
+
 
