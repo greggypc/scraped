@@ -14,20 +14,20 @@ const scrape = function() {
     // For each element with a "title" class
     $("article.item").each((i, element) => {
       // Save data of each link enclosed in the current element
-      var title = $(element).find(".title").find("a").text().trim();
-      var url = $(element).find(".title").find("a").attr("href");
-      var summary = $(element).find(".teaser").find("a").text().trim();
-      var imgUrl = $(element).find("a").find("img").attr("src");
+      let title = $(element).find(".title").find("a").text().trim();
+      let url = $(element).find(".title").find("a").attr("href");
+      let summary = $(element).find(".teaser").find("a").text().trim();
+      let imgUrl = $(element).find("a").find("img").attr("src");
 
       // If this found element contains all data I need
       if (title && link && subtitle && imgLink) {
 
         //make tidy. Remmove extra lines/spaces
-        const titleNeat = title.replace(/(\r\n|\n|\r|\t||\s+)/gm, " ").trim();
-        const summaryNeat = summary.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
+        let titleNeat = title.replace(/(\r\n|\n|\r|\t||\s+)/gm, " ").trim();
+        let summaryNeat = summary.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
 
         // Insert the data in the Headline collection
-        const dataToAdd = {
+        let dataToAdd = {
           title: titleNeat,
           url: url,
           summary: summaryNeat,

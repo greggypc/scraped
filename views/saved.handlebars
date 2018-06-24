@@ -30,74 +30,16 @@
       </div>
     </div>
 
-  {{#each headline}}
-    <div class="headline-container">
-      <div class="row">
-        <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">{{this.title}}</h3>
-          <button type="button" class="btn btn-danger btn-article-delete">Delete From Saved</button>
-          <button type="button" class="btn btn-primary btn-lg note-modal" data-toggle="modal" data-target="#notesModal">
-            Article Notes
-          </button>
-        </div>
-        <div class="panel-body">
-          {{this.summary}}
-        </div>
-      </div>
-      </div>
+    <!-- Main saved articles container-->
+    <div class="container article-container"> 
     </div>
-  {{/each}}
 
 
-  <!-- Modal -->
-<div class="modal fade" id="notesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Notes for Article: {{this.id}}</h4>
-      </div>
+    <footer>
+      <p>&copy; 2018 Scraper, Inc. All Rights Reserved</p>
+    </footer>
 
-      <div class="modal-body">
-        {{#if notes}}
-         <ul>
-           {{#each note}}
-            <li class="list-group-item">{{this.note}}</li>
-           {{/each}} 
-          </ul>
-        {{else}}
-            <ul><li class="list-group-item">No added notes for this article.</li></ul>
-        <textarea placeholder="New Note" rows="4" cols="60"></textarea>
-        {{/if}}
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary btn-save-note">Save Note</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-      <footer>
-        <p>&copy; 2018 Scraper, Inc. All Rights Reserved</p>
-      </footer>
-
- {{!-- <div class="bootbox modal fade in" tabindex="-1" role="dialog" style="display: block;">
-   <div class="modal-dialog">
-     <div class="modal-content">
-       <div class="modal-body"><button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
-       <div class="bootbox-body">
-         <div class="container-fluid text-center"><h4>Notes For Article: 5aab061f193ccb0011853f3f</h4>
-         <hr>
-         <ul class="list-group note-container">
-           <li class="list-group-item note">test<button class="btn btn-danger note-delete">x</button></li>
-           </ul><textarea placeholder="New Note" rows="4" cols="60">
-
-           </textarea><button class="btn btn-success save">Save Note</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>  --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    <script src="../../assets/javascript/saved.js"></script>

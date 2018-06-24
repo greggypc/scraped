@@ -1,33 +1,43 @@
 
 $(document).ready(function() {
-  console.log(`home.js`);
+  console.log(`index.js`);
 
   // hold our scraped headlines
-  var headlinesContainer = $(".headlines-container");
+  var articleContainer = $(".article-container");
   
-  // Click event to save headlines
+  // Click event listener to save headlines
   //$(document).on("click", "button.btn-save", handleSaveHeadline);
-  // Click event to scrape anew
+  // Click event listener to scrape fresh articles
  $(document).on("click", "button.btn-scrape", handleNewScrape);
 
 
   
-  // function layoutPage() {
-  //   console.log(`in layoutPage()`);
+  initPage = () => {
+    console.log(`in initPage()`);
 
-  //   headlinesContainer.empty();
-  //   $.get("/"), data => {
-  //     console.log(data);
-  //   };
-  // };
+    // empty article container/run AJAX request for unsaved headlines
+    articleContainer.empty();
+    $.get("/api/headlines?saved=false").then(data => {
+      // if w ehave articles, render to DOM
+      console.log(data);
+      if (data && data.length) {
+        renderArticles(data);
+      }else {
+        // render message 'no articles!'
+        renderEmpty();
+      }
+    });
+  };
 
-  // layoutPage();
+  initPage();
 
 
 
-function handleNewScrape() {
-  $.get("/scrape").then(function(articles) {
-    layoutPage();
+
+handleNewScrape = () => {
+  $.get("/api/fetch").then(data => {
+    initPage();
+    bootbox.alert(`<h3 class='text-center m-top-80'>${ data.message }</h3>`)
   });
 };
 
