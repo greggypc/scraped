@@ -4,7 +4,7 @@ const db = require("../models");
 
 module.exports = {
   // find all headlines, sort by date and return
-  findAll(req, res) {
+  findAll: function(req, res) {
     db.Headline
       .find(req.query)
       .sort({ date: -1 })
@@ -13,13 +13,13 @@ module.exports = {
       });
   },
   // delete a specific headline
-  delete(req, res) {
+  delete: function(req, res) {
     db.Headline.remove({ _id: req.params.id }).then(dbHeadline => {
       res.json(dbHeadline);
     });
   },
   // update specific headline
-  update(req, res) {
+  update: function(req, res) {
     db.Headline.findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true }).then(dbHeadline => {
       res.json(dbHeadline);
     });

@@ -23,7 +23,7 @@ const scrape = function() {
       if (title && link && subtitle && imgLink) {
 
         //make tidy. Remmove extra lines/spaces
-        let titleNeat = title.replace(/(\r\n|\n|\r|\t||\s+)/gm, " ").trim();
+        let titleNeat = title.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
         let summaryNeat = summary.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
 
         // Insert the data in the Headline collection
