@@ -21,6 +21,9 @@ $(document).ready(function() {
     $.get("/api/headlines?saved=false").then(data => {
       // if we have articles, render to DOM
       console.log(data);
+      console.log(data[1].summary);
+      console.log(data[1].title);
+
       if (data && data.length) {
         renderArticles(data);
       }else {
@@ -35,7 +38,7 @@ $(document).ready(function() {
     // we are passed an array of JSON containing all available articles in db
     const articlePanels = [];
     // pass each JSON object to function createPanel 
-    for (var i = 0; i < articles.length; i++) {
+    for (let i = 0; i < articles.length; i++) {
       articlePanels.push(createPanel(articles[i]));
     }
   
@@ -49,16 +52,16 @@ $(document).ready(function() {
     let panel = $(
         `<div class="panel panel-default">
             <div id="headline-panel" class="panel-heading clearfix">
-              <h3 class="panel-title align-middle"><a href="${this.url}" target="_blank">${this.title}</a>
+              <h3 class="panel-title align-middle"><a href="${article.url}" target="_blank">${article.title}</a>
               <button type="button" class="btn btn-success pull-right btn-save">Save Article</button></h3>
   
             </div>
             <div class="panel-body">
               <div class="col-lg-3 col-md-3 col-sm-3 news-thumb" >
-              <a href="${this.url}" target="_blank"><img width="200px" class="img-responsive img-thumbnail news-thumb" src="${this.imgUrl}" alt="${this.title}" /></a>
+              <a href="${article.url}" target="_blank"><img width="200px" class="img-responsive img-thumbnail news-thumb" src="${article.imgUrl}" alt="${article.title}" /></a>
               </div> 
               <div class="col-lg-9 col-md-9 col-sm-9" >
-              <div>${this.summary}</div>
+              <div>${article.summary}</div>
               </div> 
             </div>
         </div>`

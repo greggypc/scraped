@@ -42,17 +42,17 @@ $(document).ready(function() {
     let panel = $(
         `<div class="panel panel-default">
             <div id="headline-panel" class="panel-heading clearfix">
-              <h3 class="panel-title align-middle"><a href="${this.url}" target="_blank">${this.title}</a>
+              <h3 class="panel-title align-middle"><a href="${article.url}" target="_blank">${article.title}</a>
               <button type="button" class="btn btn-info pull-right notes">Article Notes</button></h3>
               <button type="button" class="btn btn-danger pull-right delete">Delete From Saved</button></h3>
   
             </div>
             <div class="panel-body">
               <div class="col-lg-3 col-md-3 col-sm-3 news-thumb" >
-              <a href="${this.url}" target="_blank"><img width="200px" class="img-responsive img-thumbnail news-thumb" src="${this.imgUrl}" alt="${this.title}" /></a>
+              <a href="${article.url}" target="_blank"><img width="200px" class="img-responsive img-thumbnail news-thumb" src="${article.imgUrl}" alt="${article.title}" /></a>
               </div> 
               <div class="col-lg-9 col-md-9 col-sm-9" >
-              <div>${this.summary}</div>
+              <div>${article.summary}</div>
               </div> 
             </div>
         </div>`
@@ -74,7 +74,6 @@ $(document).ready(function() {
         <h3>Would You Like To Browse Available Articles?</h3>
         </div>
         <div class='panel-body text-center'>
-        <h4><a class='scrape-new'>Try Scraping New Articles</a></h4>
         <h4><a href='/'>Browse Articles</a></h4>
         </div>
         </div>`
@@ -96,7 +95,7 @@ $(document).ready(function() {
       for(let i = 0; i < data.notes.length; i++) {
         // construct li element to contain noteText and delete button
         currentNote = $(
-          `<li class="list-group-item note">${ data.notes[i].noteText }
+          `<li class="list-group-item note">${data.notes[i].noteText}
           <button class="btn btn-danger note-delete">x</button></li>`
         );
         // store note id on delete button for easy access
@@ -110,7 +109,7 @@ $(document).ready(function() {
   }
 
   function handleArticleDelete() {
-    // delete the panel the delete buttons sites inside
+    // delete the panel the delete buttons sits inside of
     const articleToDelete = $(this).parents(".panel").data();
     $.ajax({
       method: "DELETE",
@@ -130,12 +129,12 @@ $(document).ready(function() {
     // get associated notes
     $.get("/api/notes/" + currentArticle._id).then(data => {
       // construct notes HTML
-      const modalText = 
+      var modalText = 
         `<div class="container-fluid text-center">
         <h4>Notes For Article: ${currentArticle._id}</h4>
         <hr />
         <ul class="list-group note-container"></ul>
-        <textarea placeholder="New Note" rows"4" cols="60"></textarea>
+        <textarea placeholder="New Note" rows"4" cols="70"></textarea>
         <button class="btn btn-success save">Save Note</button>
         </div>`;
         // add HTML to note modal
@@ -143,7 +142,7 @@ $(document).ready(function() {
           message: modalText,
           closeButton: true
         });
-        let noteData = {
+        var noteData = {
           _id: currentArticle._id,
           notes: data || []
         };
@@ -166,6 +165,11 @@ $(document).ready(function() {
       };
       $.post("/api/notes", noteData).then( () => {
         bootbox.hideAll();
+      })
+      .catch(err => {
+        res.json({
+          message: `got a problem.`
+        });
       });
     }
   }

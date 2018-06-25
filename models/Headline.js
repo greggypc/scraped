@@ -11,7 +11,6 @@ const HeadlineSchema = new Schema({
     unique: true,
     required: true
   },
-  // `link` is required and of type String
   url: {
     type: String,
     required: true
