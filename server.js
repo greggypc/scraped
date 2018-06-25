@@ -10,8 +10,6 @@ const PORT = process.env.PORT || 3003;
 // Initialize Express
 const app = express();
 
-// Configure middleware
-
 // Use morgan logger for logging requests
 app.use(logger('dev'));
 
@@ -38,9 +36,7 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoScraper
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, {
-  //useMongoClient: true
-});
+mongoose.connect(MONGODB_URI);
 
 // Start the server
 app.listen(PORT, () => {

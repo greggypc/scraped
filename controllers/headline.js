@@ -1,6 +1,6 @@
 //controller - headlines
 
-const db = require("../models");
+var db = require("../models");
 
 module.exports = {
   // find all headlines, sort by date and return

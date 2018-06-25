@@ -14,7 +14,7 @@ module.exports = {
   //create a new note
   create(req,res) {
     db.Note
-      .create(req,body)
+      .create(req.body)
       .then(dbNote => {
         res.json(dbNote);
       });

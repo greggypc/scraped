@@ -39,7 +39,7 @@ $(document).ready(function() {
       articlePanels.push(createPanel(articles[i]));
     }
   
-    // now we have createPanel HTML stored in array articlePanel
+    // now we have createPanel HTML stored in array articlePanels
     // append each to main articleContainer
     articleContainer.append(articlePanels); 
   }
@@ -84,7 +84,6 @@ $(document).ready(function() {
         <h4><a href='/saved'>Go to Saved Articles</a></h4>
         </div>
         </div>`
-      .join("")
     );
     // append alert data to main container
     articleContainer.append(emptyAlert);

@@ -11,7 +11,7 @@ const scrape = function() {
       // empty array to hold article data
       const articles = [];
     
-    // For each element with a "title" class
+    // For each element article.item
     $("article.item").each((i, element) => {
       // Save data of each link enclosed in the current element
       let title = $(element).find(".title").find("a").text().trim();
@@ -20,7 +20,7 @@ const scrape = function() {
       let imgUrl = $(element).find("a").find("img").attr("src");
 
       // If this found element contains all data I need
-      if (title && link && subtitle && imgLink) {
+      if (title && url && summary && imgUrl) {
 
         //make tidy. Remmove extra lines/spaces
         let titleNeat = title.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
