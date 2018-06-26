@@ -146,7 +146,7 @@ $(document).ready(function() {
           _id: currentArticle._id,
           notes: data || []
         };
-        // put id on save button for easy acess when adding new note
+        // put id on save button for easy access when adding new note
         $(".btn.save").data("article", noteData);
         // populate noteHTML inside just opened modal
         renderNotesList(noteData);
@@ -167,9 +167,7 @@ $(document).ready(function() {
         bootbox.hideAll();
       })
       .catch(err => {
-        res.json({
-          message: `got a problem.`
-        });
+        console.log(`trouble w/ handleNoteSave button`)
       });
     }
   }
