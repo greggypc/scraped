@@ -1,4 +1,16 @@
 
+p {
+  font-size: 18px;
+}
+
+.jumbotron {
+  margin-bottom: 30px;
+  background-image: url(../images/npr-opacity.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #333;
+  /* text-shadow: rgb(253, 252, 252) 0.3em 0.3em 0.3em; */
+}
 
 .btn-scrape{
   margin-top: 8px;
@@ -8,12 +20,25 @@
   text-decoration: line-through;
 }
 
-.news-thumb {
-  
+.panel {
+  box-shadow: 5px 6px 8px #888888;
+}
+
+.panel-margin {
+  margin-top: 30px;
 }
 
 .panel-title {
-  display: inline;
-  vertical-align: middle;
+  font-size: 20px;
+  padding-top: 5px;
+}
+
+.delete {
+  margin-right: 10px;
+}
+
+.footer {
+  text-align: center;
+  margin-top:30px;
 }
 

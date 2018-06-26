@@ -40,19 +40,19 @@ $(document).ready(function() {
   function createPanel(article) {
     // take a single JSON object and create jQuery element composed of formatted HTML
     let panel = $(
-        `<div class="panel panel-default">
+        `<div class="panel panel-default panel-margin">
             <div id="headline-panel" class="panel-heading clearfix">
               <h3 class="panel-title align-middle"><a href="${article.url}" target="_blank">${article.title}</a>
-              <button type="button" class="btn btn-info pull-right notes">Article Notes</button></h3>
+              <button type="button" class="btn btn-info pull-right notes">Article Notes</button>
               <button type="button" class="btn btn-danger pull-right delete">Delete From Saved</button></h3>
   
             </div>
             <div class="panel-body">
-              <div class="col-lg-3 col-md-3 col-sm-3 news-thumb" >
+              <div class="col-lg-2 col-md-2 col-sm-2 news-thumb" >
               <a href="${article.url}" target="_blank"><img width="200px" class="img-responsive img-thumbnail news-thumb" src="${article.imgUrl}" alt="${article.title}" /></a>
               </div> 
-              <div class="col-lg-9 col-md-9 col-sm-9" >
-              <div>${article.summary}</div>
+              <div class="col-lg-10 col-md-10 col-sm-10 summary-text" >
+              <p>${article.summary}</p>
               </div> 
             </div>
         </div>`
