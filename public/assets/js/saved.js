@@ -163,7 +163,7 @@ $(document).ready(function() {
         _id: $(this).data("article")._id,
         noteText: newNote
       };
-      $.post("/api/notes", noteData).then( () => {
+      $.post("/api/notes/", noteData).then( () => {
         bootbox.hideAll();
       })
       .catch(err => {
