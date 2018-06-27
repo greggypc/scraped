@@ -6,17 +6,12 @@ const Schema = mongoose.Schema;
 // Using the Schema constructor, create a new NoteSchema object
 const noteSchema = new Schema({
   //headline associated with the note
-  _headlineId: {
+  article: {
     type: Schema.Types.ObjectId,
     ref: "Headline"
   },
-  // date is string
-  date: {
-    type: Date,
-    default: Date.now
-  },
-  // note is a string
-  noteText: String
+  noteText: String,
+  autoIndex: false 
 });
 
 // This creates our model from the above schema, using mongoose's model method

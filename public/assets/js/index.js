@@ -50,7 +50,7 @@ $(document).ready(function() {
   function createPanel(article) {
     // take a single JSON object and create jQuery element composed of formatted HTML
     let panel = $(
-        `<div class="panel panel-default panel-margin">
+        `<div class="panel panel-default panel-margin show">
             <div id="headline-panel" class="panel-heading clearfix">
               <h3 class="panel-title align-middle"><a href="${article.url}" target="_blank">${article.title}</a>
               <button type="button" class="btn btn-success pull-right btn-save">Save Article</button></h3>
