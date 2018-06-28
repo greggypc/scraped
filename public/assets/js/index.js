@@ -52,8 +52,8 @@ $(document).ready(function() {
     let panel = $(
         `<div class="panel panel-default panel-margin show">
             <div id="headline-panel" class="panel-heading clearfix">
-              <h3 class="panel-title align-middle"><a href="${article.url}" target="_blank">${article.title}</a>
-              <button type="button" class="btn btn-success pull-right btn-save">Save Article</button></h3>
+              <p class="panel-title align-middle"><a href="${article.url}" target="_blank">${article.title}</a></p>
+              <button type="button" class="btn btn-success pull-right btn-save">Save Article</button>
   
             </div>
             <div class="panel-body">
@@ -61,7 +61,7 @@ $(document).ready(function() {
               <a href="${article.url}" target="_blank"><img width="200px" class="img-responsive img-thumbnail news-thumb" src="${article.imgUrl}" alt="${article.title}" /></a>
               </div> 
               <div class="col-lg-10 col-md-10 col-sm-10 summary-text" >
-              <p>${article.summary}</p>
+              <div class="summary">${article.summary}</div>
               </div> 
             </div>
         </div>`

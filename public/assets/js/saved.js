@@ -42,9 +42,9 @@ $(document).ready(function() {
     let panel = $(
         `<div class="panel panel-default panel-margin">
             <div id="headline-panel" class="panel-heading clearfix">
-              <h3 class="panel-title align-middle"><a href="${article.url}" target="_blank">${article.title}</a>
+              <p class="panel-title align-middle"><a href="${article.url}" target="_blank">${article.title}</a></p>
               <button type="button" class="btn btn-info pull-right notes">Article Notes</button>
-              <button type="button" class="btn btn-danger pull-right delete">Delete From Saved</button></h3>
+              <button type="button" class="btn btn-danger pull-right delete">Delete From Saved</button>
   
             </div>
             <div class="panel-body">
@@ -163,9 +163,12 @@ $(document).ready(function() {
         _id: $(this).data("article")._id,
         noteText: newNote
       };
-      $.post("/api/notes/", noteData).then(() => {
+      $.post("/api/notes/", noteData).then( () => {
         bootbox.hideAll();
       })
+      .catch(err => {
+        console.log(`trouble w/ handleNoteSave button`)
+      });
     }
   }
 

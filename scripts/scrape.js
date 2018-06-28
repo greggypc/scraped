@@ -22,7 +22,7 @@ const scrape = function() {
       // If this found element contains all data I need
       if (title && url && summary && imgUrl) {
 
-        //make tidy. Remmove extra lines/spaces
+        //make tidy. Remove extra lines/spaces
         let titleNeat = title.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
         let summaryNeat = summary.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
 

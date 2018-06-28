@@ -17,7 +17,10 @@ module.exports = {
       .create(req.body)
       .then(dbNote => {
         res.json(dbNote);
-      });
+      })
+      .catch(function(err){
+        res.json(err);
+      })
   },
   // delete a note by id
   delete(req,res) {

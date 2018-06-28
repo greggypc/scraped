@@ -10,8 +10,7 @@ const noteSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Headline"
   },
-  noteText: String,
-  autoIndex: false 
+  noteText: String
 });
 
 // This creates our model from the above schema, using mongoose's model method

@@ -3,10 +3,6 @@
   font-family: "Poppins","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-p {
-  font-size: 18px;
-}
-
 .jumbotron {
   margin-bottom: 30px;
   background-image: url(../images/npr-opacity.png);
@@ -33,19 +29,22 @@ p {
 }
 
 .panel-title {
-  font-size: 20px;
-  padding-top: 5px;
+  font-size: 18px;
+  font-weight: 400;
 }
 
-.slide-fade panel {
-  transition: all 0.4s ease-out;
-  opacity: 0;
-}
-.slide-fade panel.show {
-  opacity: 1;
+.summary {
+  font-size: 16px;
 }
 
+button.btn-save {
+  justify-items: right;
+}
 .delete {
+  margin-right: 10px;
+}
+
+.notes {
   margin-right: 10px;
 }
 
@@ -54,3 +53,15 @@ p {
   margin-top:30px;
 }
 
+/* =======MEDIA QUERIES====== */
+
+/* tweak font size/spacing for devices */
+@media (max-width: 1200px) {
+ button.notes, button.delete, button.btn-save {
+    margin-top: 10px;
+
+  }
+  .pull-right {
+    float: left!important;
+} 
+}
