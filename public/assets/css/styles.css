@@ -63,5 +63,17 @@ button.btn-save {
   }
   .pull-right {
     float: left!important;
-} 
+  } 
 }
+
+@media (max-width: 1000px) {
+  .news-thumb {
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 400px) {
+   .note-textarea {
+     width: 100%;
+   }
+ }

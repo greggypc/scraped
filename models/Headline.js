@@ -8,7 +8,7 @@ const HeadlineSchema = new Schema({
   // `title` is required and of type String
   title: {
     type: String,
-    unique: true,
+    unique: false,
     required: true
   },
   url: {
@@ -27,6 +27,10 @@ const HeadlineSchema = new Schema({
   saved: {
     type: Boolean,
     default: false
+  },
+  date: {
+    type: Date,
+    default: Date.now
   },
   // `note` is an object that stores a Note id
   // The ref property links the ObjectId to the Note model

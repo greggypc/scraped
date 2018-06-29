@@ -61,7 +61,7 @@ $(document).ready(function() {
               <a href="${article.url}" target="_blank"><img width="200px" class="img-responsive img-thumbnail news-thumb" src="${article.imgUrl}" alt="${article.title}" /></a>
               </div> 
               <div class="col-lg-10 col-md-10 col-sm-10 summary-text" >
-              <div class="summary">${article.summary}</div>
+              <p>${article.summary}</p>
               </div> 
             </div>
         </div>`

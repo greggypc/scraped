@@ -10,19 +10,23 @@ module.exports = {
       .sort({ date: -1 })
       .then(dbHeadline => {
         res.json(dbHeadline);
-      });
+      })
+      .catch(err => {res.json(err) })
   },
   // delete a specific headline
   delete: function(req, res) {
     db.Headline.remove({ _id: req.params.id }).then(dbHeadline => {
       res.json(dbHeadline);
-    });
+    })
+    .catch(err => {res.json(err) })
+
   },
   // update specific headline
   update: function(req, res) {
     db.Headline.findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true }).then(dbHeadline => {
       res.json(dbHeadline);
-    });
+    })
+    .catch(err => {res.json(err) })
   }
 };
 

@@ -6,10 +6,11 @@ module.exports = {
   // find one note
   findOne(req,res) {
     db.Note
-      .findOne(req.query)
+      .find(req.query)
       .then(dbNote => {
         res.json(dbNote);
-      });
+      })
+      .catch(err => {res.json(err) })
   },
   //create a new note
   create(req,res) {
@@ -18,9 +19,7 @@ module.exports = {
       .then(dbNote => {
         res.json(dbNote);
       })
-      .catch(function(err){
-        res.json(err);
-      })
+      .catch(err => {res.json(err) })
   },
   // delete a note by id
   delete(req,res) {

@@ -126,15 +126,19 @@ $(document).ready(function() {
     // open notes modal
     // get article id from panel element
     var currentArticle = $(this).parents(".panel").data();
+    console.log($(this).parents(".panel").data());
+    console.log(currentArticle._id);
+    console.log(currentArticle.noteText);
+
     // get associated notes
-    $.get("/api/notes/" + currentArticle._id).then(data => {
+    $.get("/api/notes/" + 'ObjectId("' + currentArticle._id + '")').then(data => {
       // construct notes HTML
       var modalText = 
         `<div class="container-fluid text-center">
         <h4>Notes For Article: ${currentArticle._id}</h4>
         <hr />
         <ul class="list-group note-container"></ul>
-        <textarea placeholder="New Note" rows"4" cols="70"></textarea>
+        <textarea class="note-textarea" placeholder="New Note" rows"4" cols="70"></textarea>
         <button class="btn btn-success save">Save Note</button>
         </div>`;
         // add HTML to note modal
@@ -146,6 +150,7 @@ $(document).ready(function() {
           _id: currentArticle._id,
           notes: data || []
         };
+        console.log( "noteData is " +noteData);
         // put id on save button for easy access when adding new note
         $(".btn.save").data("article", noteData);
         // populate noteHTML inside just opened modal
@@ -165,10 +170,8 @@ $(document).ready(function() {
       };
       $.post("/api/notes/", noteData).then( () => {
         bootbox.hideAll();
-      })
-      .catch(err => {
-        console.log(`trouble w/ handleNoteSave button`)
       });
+
     }
   }
 
