@@ -8,6 +8,7 @@ const noteSchema = new Schema({
   //headline associated with the note
   article: {
     type: Schema.Types.ObjectId,
+    unique: false,
     ref: "Headline"
   },
   noteText: String

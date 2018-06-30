@@ -26,7 +26,7 @@ $(document).ready(function() {
 
   function renderArticles(articles) {
     // we are passed an array of JSON containing all available articles in db
-    const articlePanels = [];
+    var articlePanels = [];
     // pass each JSON object to function createPanel 
     for (var i = 0; i < articles.length; i++) {
       articlePanels.push(createPanel(articles[i]));
@@ -43,13 +43,14 @@ $(document).ready(function() {
         `<div class="panel panel-default panel-margin">
             <div id="headline-panel" class="panel-heading clearfix">
               <p class="panel-title align-middle"><a href="${article.url}" target="_blank">${article.title}</a></p>
-              <button type="button" class="btn btn-info pull-right notes">Article Notes</button>
               <button type="button" class="btn btn-danger pull-right delete">Delete From Saved</button>
-  
+              <button type="button" class="btn btn-info pull-right notes">Article Notes</button>
+              
             </div>
             <div class="panel-body">
               <div class="col-lg-2 col-md-2 col-sm-2 news-thumb" >
-              <a href="${article.url}" target="_blank"><img width="200px" class="img-responsive img-thumbnail news-thumb" src="${article.imgUrl}" alt="${article.title}" /></a>
+              <a href="${article.url}" target="_blank"><img width="200px" class="img-responsive 
+                img-thumbnail news-thumb" src="${article.imgUrl}" alt="${article.title}" /></a>
               </div> 
               <div class="col-lg-10 col-md-10 col-sm-10 summary-text" >
               <p>${article.summary}</p>
@@ -66,7 +67,7 @@ $(document).ready(function() {
   function renderEmpty() {
     // we don't have any saved articles!
     const emptyAlert = $(
-        `<div class='alert alert-warning text-center'>
+        `<div class='alert alert-info text-center'>
         <h4>Looks like we don't have any saved articles.</h4>
         </div>
         <div class='panel panel-default'>
@@ -128,17 +129,16 @@ $(document).ready(function() {
     var currentArticle = $(this).parents(".panel").data();
     console.log($(this).parents(".panel").data());
     console.log(currentArticle._id);
-    console.log(currentArticle.noteText);
 
     // get associated notes
-    $.get("/api/notes/" + 'ObjectId("' + currentArticle._id + '")').then(data => {
+    $.get("/api/notes/" + currentArticle._id).then(data => {
       // construct notes HTML
       var modalText = 
         `<div class="container-fluid text-center">
         <h4>Notes For Article: ${currentArticle._id}</h4>
         <hr />
         <ul class="list-group note-container"></ul>
-        <textarea class="note-textarea" placeholder="New Note" rows"4" cols="70"></textarea>
+        <textarea class="note-textarea" placeholder="New Note" rows="4" cols="70"></textarea>
         <button class="btn btn-success save">Save Note</button>
         </div>`;
         // add HTML to note modal
@@ -150,7 +150,6 @@ $(document).ready(function() {
           _id: currentArticle._id,
           notes: data || []
         };
-        console.log( "noteData is " +noteData);
         // put id on save button for easy access when adding new note
         $(".btn.save").data("article", noteData);
         // populate noteHTML inside just opened modal
@@ -168,7 +167,7 @@ $(document).ready(function() {
         _id: $(this).data("article")._id,
         noteText: newNote
       };
-      $.post("/api/notes/", noteData).then( () => {
+      $.post("/api/notes", noteData).then( () => {
         bootbox.hideAll();
       });
 

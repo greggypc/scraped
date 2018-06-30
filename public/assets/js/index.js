@@ -1,7 +1,5 @@
 
 $(document).ready(function() {
-  console.log(`index.js`);
-
   // hold our scraped headlines
   const articleContainer = $(".article-container");
   
@@ -9,20 +7,17 @@ $(document).ready(function() {
   $(document).on("click", ".btn-save", handleArticleSave);
   // Click event listener to scrape fresh articles
   $(document).on("click", ".btn-scrape", handleArticleScrape);
+  $(document).on("click", ".scrape-new", handleArticleScrape);
 
   // layout page
   initPage();
   
   function initPage() {
-    console.log(`in initPage()`);
-
     // empty article container/run AJAX request for unsaved headlines
     articleContainer.empty();
     $.get("/api/headlines?saved=false").then(data => {
       // if we have articles, render to DOM
       console.log(data);
-      console.log(data[1].summary);
-      console.log(data[1].title);
 
       if (data && data.length) {
         renderArticles(data);
@@ -75,7 +70,7 @@ $(document).ready(function() {
   function renderEmpty() {
     // we don't have any new articles!
     const emptyAlert = $(
-        `<div class='alert alert-warning text-center'>
+        `<div class='alert alert-info text-center'>
         <h4>Looks like we don't have any new articles.</h4>
         </div>
         <div class='panel panel-default'>
@@ -100,7 +95,7 @@ $(document).ready(function() {
       .data();
     articleToSave.saved = true;
   
-    // use put to update existing record
+    // use put to update existing record and reload remaining articles page
     $.ajax({
       method: "PUT",
       url: `/api/headlines/${articleToSave._id}`,
@@ -115,7 +110,7 @@ $(document).ready(function() {
   
   function handleArticleScrape() {
     // scrape NPR, compare to articles already in db
-    // re-render to DOM and alert user to number of new articles saved
+    // re-render to DOM and alert user to number (if any) of new articles saved
     $.get("/api/fetch").then(data => {
       initPage();
       bootbox.alert(`<h3 class='text-center m-top-80'>${ data.message }</h3>`)
