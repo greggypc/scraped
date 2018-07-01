@@ -131,7 +131,7 @@ $(document).ready(function() {
     console.log(currentArticle._id);
 
     // get associated notes
-    $.get("/api/notes/" + currentArticle._id).then(data => {
+    $.get(`/api/notes/${currentArticle._id}`).then(data => {
       // construct notes HTML
       var modalText = 
         `<div class="container-fluid text-center">
@@ -139,7 +139,7 @@ $(document).ready(function() {
         <hr />
         <ul class="list-group note-container"></ul>
         <textarea class="note-textarea" placeholder="New Note" rows="4" cols="70"></textarea>
-        <button class="btn btn-success save">Save Note</button>
+        <button id="${currentArticle._id}" class="btn btn-success save">Save Note</button>
         </div>`;
         // add HTML to note modal
         bootbox.dialog({
@@ -163,11 +163,15 @@ $(document).ready(function() {
     var newNote = $(".bootbox-body textarea").val().trim();
     // if we have a new note, post to db and close modal
     if(newNote) {
+      console.log("we have a newNote! Id is: " + $(this).data("article")._id);
+
+
       noteData = {
-        _id: $(this).data("article")._id,
+        article: $(this).data("article")._id,
         noteText: newNote
       };
-      $.post("/api/notes", noteData).then( () => {
+      console.log("we have a newNote! Id is: " + noteData.article);
+      $.post("/api/headlines/" + noteData.article , noteData).then( () => {
         bootbox.hideAll();
       });
 

@@ -1,12 +1,12 @@
-const router = require("express").Router();
+var router = require("express").Router();
 
 // route renders home page
-router.get("/", (req,res) => {
+router.get("/", function(req,res) {
   res.render("home");
 });
 
 //route render handlebars 'saved articles' page
-router.get("/saved", (req,res) => {
+router.get("/saved", function(req,res) {
   res.render("saved");
 });
 

@@ -11,10 +11,10 @@ var scrape = require("../scripts/scrape");
 module.exports = {
   scrapeHeadlines: function(req,res) {
     return scrape()
-      .then(articles => {
+      .then( function(articles) {
         return db.Headline.create(articles);
       })
-      .then(dbHeadline => {
+      .then( function(dbHeadline) {
         if (dbHeadline.length === 0) {
           res.json({
             message: `No New Articles Currently Available.`

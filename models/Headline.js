@@ -1,14 +1,14 @@
-const mongoose = require("mongoose");
+var mongoose = require("mongoose");
 
 // Save a reference to the Schema constructor
-const Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
 // Using the Schema constructor, create a new Headlinechema object
-const HeadlineSchema = new Schema({
+var HeadlineSchema = new Schema({
   // `title` is required and of type String
   title: {
     type: String,
-    unique: true,
+    unique: { index: { unique: true } },
     required: true
   },
   url: {
@@ -32,7 +32,7 @@ const HeadlineSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  // `note` is an object that stores a Note id
+   // `note` is an object that stores a Note id
   // The ref property links the ObjectId to the Note model
   // This allows us to populate the Headline with an associated Note
   note: {
@@ -42,7 +42,7 @@ const HeadlineSchema = new Schema({
 });
 
 // This creates our model from the above schema, using mongoose's model method
-const Headline = mongoose.model("Headline", HeadlineSchema);
+var Headline = mongoose.model("Headline", HeadlineSchema);
 
 // Export the Headline model
 module.exports = Headline;
