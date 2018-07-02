@@ -11,17 +11,19 @@ module.exports = {
       .then( function(dbHeadline) {
         res.json(dbHeadline);
       })
-      // .catch(err => {res.json(err) })
+      .catch(err => {res.json(err) })
   },
+  // find all notes attached to a specific headline id
   findOne: function(req, res) {
     db.Headline
     .findOne({ _id: req.params.id })
     .populate('note')
-    .then( function(dbHeadline) {
+    .then(function(dbHeadline) {
       res.json(dbHeadline);
     })
      .catch(err => {res.json(err) })
   },
+  // post new note atached to specific headline
   create: function(req,res) {
     db.Note
       .create(req.body)
@@ -39,10 +41,10 @@ module.exports = {
     db.Headline.remove({ _id: req.params.id }).then( function(dbHeadline) {
       res.json(dbHeadline);
     })
-    // .catch(err => {res.json(err) })
+    .catch(err => {res.json(err) })
 
   },
-  // update specific headline
+  // update when headline is saved
   update: function(req, res) {
     db.Headline.findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true }).then(dbHeadline => {
       res.json(dbHeadline);

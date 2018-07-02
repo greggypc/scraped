@@ -97,7 +97,7 @@ $(document).ready(function() {
         // construct li element to contain noteText and delete button
         currentNote = $(
           `<li class="list-group-item note">${data.notes[i].noteText}
-          <button class="btn btn-danger note-delete">x</button></li>`
+          <button class="btn btn-danger pull-right note-delete">x</button></li>`
         );
         // store note id on delete button for easy access
         currentNote.children("button").data("_id", data.notes[i]._id);
@@ -139,7 +139,7 @@ $(document).ready(function() {
         <hr />
         <ul class="list-group note-container"></ul>
         <textarea class="note-textarea" placeholder="New Note" rows="4" cols="70"></textarea>
-        <button id="${currentArticle._id}" class="btn btn-success save">Save Note</button>
+        <button class="btn btn-success save">Save Note</button>
         </div>`;
         // add HTML to note modal
         bootbox.dialog({
@@ -162,16 +162,17 @@ $(document).ready(function() {
     var noteData;
     var newNote = $(".bootbox-body textarea").val().trim();
     // if we have a new note, post to db and close modal
-    if(newNote) {
-      console.log("we have a newNote! Id is: " + $(this).data("article")._id);
+    if(!newNote) {
+      alert("Please type a note!");
+    }else {
+      console.log("we have a newNote! Id is: " + $(this).data("article")._id + " " + newNote);
 
 
       noteData = {
         article: $(this).data("article")._id,
         noteText: newNote
       };
-      console.log("we have a newNote! Id is: " + noteData.article);
-      $.post("/api/headlines/" + noteData.article , noteData).then( () => {
+      $.post("/api/headlines/" + noteData.article, noteData).then( () => {
         bootbox.hideAll();
       });
 

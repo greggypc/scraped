@@ -30,7 +30,7 @@ $(document).ready(function() {
 
 
   function renderArticles(articles) {
-    // we are passed an array of JSON containing all available articles in db
+    // passed arg is array of JSON containing all available articles in db
     const articlePanels = [];
     // pass each JSON object to function createPanel 
     for (let i = 0; i < articles.length; i++) {
