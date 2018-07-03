@@ -1,4 +1,4 @@
-var router = require("express").Router();
+const router = require("express").Router();
 
 // route renders home page
 router.get("/", function(req,res) {
