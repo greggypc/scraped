@@ -24,6 +24,11 @@
   box-shadow: 5px 6px 8px #888888;
 }
 
+.fade-panel {
+  opacity: 1;
+  transition: all 2.5s ease-in-out;
+}
+
 .panel-margin {
   margin-top: 30px;
 }
@@ -40,6 +45,7 @@
 button.btn-save {
   justify-items: right;
 }
+
 .delete {
   margin-right: 10px;
 }

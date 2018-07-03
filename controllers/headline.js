@@ -1,6 +1,5 @@
 //controller - headlines
-
-var db = require("../models");
+const db = require("../models");
 
 module.exports = {
   // find all headlines, sort by date and return
@@ -8,7 +7,7 @@ module.exports = {
     db.Headline
       .find(req.query)
       .sort({ date: -1 })
-      .then( function(dbHeadline) {
+      .then( dbHeadline => {
         res.json(dbHeadline);
       })
       .catch(err => {res.json(err) })
@@ -18,7 +17,7 @@ module.exports = {
     db.Headline
     .findOne({ _id: req.params.id })
     .populate('note')
-    .then(function(dbHeadline) {
+    .then(dbHeadline => {
       res.json(dbHeadline);
     })
      .catch(err => {res.json(err) })
@@ -27,10 +26,10 @@ module.exports = {
   create: function(req,res) {
     db.Note
       .create(req.body)
-      .then(function(dbNote) {
+      .then(dbNote => {
         return Headline.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true })
       })
-      .then(function(dbHeadline){
+      .then(dbHeadline =>{
         res.json(dbHeadline);
       })
       .catch(err => {res.json(err) })
@@ -38,7 +37,7 @@ module.exports = {
 
   // delete a specific headline
   delete: function(req, res) {
-    db.Headline.remove({ _id: req.params.id }).then( function(dbHeadline) {
+    db.Headline.remove({ _id: req.params.id }).then(dbHeadline => {
       res.json(dbHeadline);
     })
     .catch(err => {res.json(err) })
@@ -49,7 +48,7 @@ module.exports = {
     db.Headline.findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true }).then(dbHeadline => {
       res.json(dbHeadline);
     })
-    // .catch(err => {res.json(err) })
+    .catch(err => {res.json(err) })
   }
 };
 

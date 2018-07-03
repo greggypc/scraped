@@ -1,10 +1,10 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 // Save a reference to the Schema constructor
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 // Using the Schema constructor, create a new Headlinechema object
-var HeadlineSchema = new Schema({
+const HeadlineSchema = new Schema({
   title: {
     type: String,
     unique: { index: { unique: true } },
@@ -41,7 +41,7 @@ var HeadlineSchema = new Schema({
 });
 
 // This creates our model from the above schema, using mongoose's model method
-var Headline = mongoose.model("Headline", HeadlineSchema);
+const Headline = mongoose.model("Headline", HeadlineSchema);
 
 // Export the Headline model
 module.exports = Headline;

@@ -1,5 +1,5 @@
-var router = require("express").Router();
-var headlineController = require("../../controllers/headline");
+const router = require("express").Router();
+const headlineController = require("../../controllers/headline");
 
 router.get("/", headlineController.findAll);
 router.get("/:id", headlineController.findOne);

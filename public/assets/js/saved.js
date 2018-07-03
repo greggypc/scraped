@@ -1,5 +1,5 @@
 
-$(document).ready(function() {
+$(document).ready( () => {
   var articleContainer = $(".article-container");
   // add event listeners to handle articles and notes
   $(document).on("click", ".btn.delete", handleArticleDelete);
@@ -26,7 +26,7 @@ $(document).ready(function() {
 
   function renderArticles(articles) {
     // we are passed an array of JSON containing all available articles in db
-    var articlePanels = [];
+    const articlePanels = [];
     // pass each JSON object to function createPanel 
     for (var i = 0; i < articles.length; i++) {
       articlePanels.push(createPanel(articles[i]));
@@ -87,8 +87,8 @@ $(document).ready(function() {
     // handles rendering note list to notes modal
     // array of notes will render once finished
     // currentNote will temporarily store each note
-    var notesToRender = [];
-    var currentNote;
+    let notesToRender = [];
+    let currentNote;
     if(!data.notes.length) {
       currentNote = `<li class="list-group-item">No notes for this article yet.</li>`;
       notesToRender.push(currentNote);
@@ -111,7 +111,7 @@ $(document).ready(function() {
 
   function handleArticleDelete() {
     // delete the panel the delete buttons sits inside of
-    const articleToDelete = $(this).parents(".panel").data();
+    let articleToDelete = $(this).parents(".panel").data();
     $.ajax({
       method: "DELETE",
       url: `/api/headlines/${articleToDelete._id}`
@@ -126,14 +126,12 @@ $(document).ready(function() {
   function handleArticleNotes() {
     // open notes modal
     // get article id from panel element
-    var currentArticle = $(this).parents(".panel").data();
-    console.log($(this).parents(".panel").data());
-    console.log(currentArticle._id);
+    let currentArticle = $(this).parents(".panel").data();
 
     // get associated notes
     $.get(`/api/notes/${currentArticle._id}`).then(data => {
       // construct notes HTML
-      var modalText = 
+      let modalText = 
         `<div class="container-fluid text-center">
         <h4>Notes For Article: ${currentArticle._id}</h4>
         <hr />
@@ -146,7 +144,7 @@ $(document).ready(function() {
           message: modalText,
           closeButton: true
         });
-        var noteData = {
+        let noteData = {
           _id: currentArticle._id,
           notes: data || []
         };
@@ -159,15 +157,12 @@ $(document).ready(function() {
 
   function handleNoteSave() {
     // save new note - set variable to hold note from input box
-    var noteData;
-    var newNote = $(".bootbox-body textarea").val().trim();
+    let noteData;
+    let newNote = $(".bootbox-body textarea").val().trim();
     // if we have a new note, post to db and close modal
     if(!newNote) {
       alert("Please type a note!");
     }else {
-      console.log("we have a newNote! Id is: " + $(this).data("article")._id + " " + newNote);
-
-
       noteData = {
         article: $(this).data("article")._id,
         noteText: newNote
@@ -181,7 +176,7 @@ $(document).ready(function() {
 
   function handleNoteDelete() {
     // grab id stored on the delete button and delete note
-    var noteToDelete = $(this).data("_id");
+    let noteToDelete = $(this).data("_id");
     // delete note and close modal
     $.ajax({
       url: `/api/notes/${noteToDelete}`,

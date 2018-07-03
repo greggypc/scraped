@@ -1,5 +1,5 @@
 
-$(document).ready(function() {
+$(document).ready( () => {
   // hold our scraped headlines
   const articleContainer = $(".article-container");
   
@@ -28,7 +28,6 @@ $(document).ready(function() {
     });
   };
 
-
   function renderArticles(articles) {
     // passed arg is array of JSON containing all available articles in db
     const articlePanels = [];
@@ -45,7 +44,7 @@ $(document).ready(function() {
   function createPanel(article) {
     // take a single JSON object and create jQuery element composed of formatted HTML
     let panel = $(
-        `<div class="panel panel-default panel-margin show">
+        `<div id="${article._id}" class="panel panel-default panel-margin">
             <div id="headline-panel" class="panel-heading clearfix">
               <p class="panel-title align-middle"><a href="${article.url}" target="_blank">${article.title}</a></p>
               <button type="button" class="btn btn-success pull-right btn-save">Save Article</button>
@@ -94,7 +93,7 @@ $(document).ready(function() {
       .parents(".panel")
       .data();
     articleToSave.saved = true;
-  
+
     // use put to update existing record and reload remaining articles page
     $.ajax({
       method: "PUT",
@@ -106,7 +105,6 @@ $(document).ready(function() {
       }
     });
   }
-  
   
   function handleArticleScrape() {
     // scrape NPR, compare to articles already in db

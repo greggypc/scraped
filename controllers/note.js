@@ -1,13 +1,12 @@
 //controller - notes
-
-var db = require("../models");
+const db = require("../models");
 
 module.exports = {
   // find all notes by id
   findAll: function(req,res) {
     db.Note
       .find({ article: req.params.id })
-      .then(function(dbNote) {
+      .then(dbNote => {
         res.json(dbNote);
       })
       .catch(err => {res.json(err) })
@@ -16,7 +15,7 @@ module.exports = {
   delete: function(req,res) {
     db.Note
       .remove({ _id: req.params.id })
-      .then(function(dbNote) {
+      .then(dbNote => {
         res.json(dbNote);
       })
       .catch(err => {res.json(err) })
