@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/greggypc/scraped#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.18.2",
     "bootbox": "^4.4.0",
     "cheerio": "^1.0.0-rc.2",
